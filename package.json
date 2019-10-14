@@ -17,6 +17,10 @@
     "test:coverage": "nyc npm test",
     "start": "nodemon src/main.js"
   },
+  "nyc" : {
+    "reporter": ["text", "html"],
+    "exclude": ["tests/**"]
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -29,6 +33,7 @@
     "eslint": "^6.5.1",
     "mocha": "^6.2.1",
     "node-fetch": "^2.6.0",
+    "nyc": "^14.1.1",
     "rimraf": "^3.0.0",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0",
