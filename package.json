@@ -15,11 +15,17 @@
     "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register",
     "test:tdd": "./node_modules/.bin/mocha tests/**/*.spec.js --watch --require babel-register",
     "test:coverage": "nyc npm test",
-    "start": "nodemon src/main.js"
+    "start": "nodemon src/main.js",
+    "coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
   },
-  "nyc" : {
-    "reporter": ["text", "html"],
-    "exclude": ["tests/**"]
+  "nyc": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +36,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.7",
     "eslint": "^6.5.1",
     "mocha": "^6.2.1",
     "node-fetch": "^2.6.0",
