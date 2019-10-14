@@ -221,11 +221,11 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-| ![Willian Justen](https://avatars2.githubusercontent.com/u/3991845?v=3&s=150)|
+| ![Willian Justen](https://avatars0.githubusercontent.com/u/45442175?s=460&v=4)|
 |:---------------------:|
-|  [Willian Justen](https://github.com/willianjusten/)   |
+|  [Willian Justen](https://github.com/VicLeite/)   |
 
-See also the list of [contributors](https://github.com/willianjusten/spotify-wrapper/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/VicLeite/spotify-wrapper/contributors) who participated in this project.
 
 ## License
 
