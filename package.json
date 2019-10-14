@@ -1,0 +1,42 @@
+{
+  "name": "spotfy-wrapper",
+  "version": "1.0.0",
+  "description": "A wrapper to work with the [Spotify Web API]",
+  "main": "src/index.js",
+  "scripts": {
+    "clear": "rimraf lib",
+    "buildBabel": "./node_modules/.bin/babel --out-dir lib src",
+    "build": "npm run clear && npm run buildBabel",
+    "build:watch": "npm run build -- --watch",
+    "build:umd": "./node_modules/.bin/webpack --output-filename spotify-wrapper.umd.js",
+    "build:umd:min": "./node_modules/.bin/webpack --output-filename spotify-wrapper.umd.min.js -p",
+    "build:all": "npm run build && npm run build:umd && npm run build:umd:min",
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "test": "./node_modules/.bin/mocha tests/**/*.spec.js --require babel-register",
+    "test:tdd": "./node_modules/.bin/mocha tests/**/*.spec.js --watch --require babel-register",
+    "test:coverage": "nyc npm test",
+    "start": "nodemon src/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.5.1",
+    "mocha": "^6.2.1",
+    "node-fetch": "^2.6.0",
+    "rimraf": "^3.0.0",
+    "sinon": "^7.5.0",
+    "sinon-chai": "^3.3.0",
+    "sinon-stub-promise": "^4.0.0",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
