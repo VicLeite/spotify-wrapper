@@ -1,5 +1,5 @@
 {
-  "name": "spotfy-wrapper-vic",
+  "name": "spotify-wrapper",
   "version": "1.0.0",
   "description": "A wrapper to work with the [Spotify Web API]",
   "main": "lib/index.js",
@@ -18,7 +18,7 @@
     "start": "nodemon src/main.js",
     "coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
   },
-  "files":[
+  "files": [
     "dist",
     "lib"
   ],
@@ -34,6 +34,8 @@
   "author": "Victoria Leite",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

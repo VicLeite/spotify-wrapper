@@ -5,12 +5,17 @@ chai.use(sinonChai);
 
 global.fetch = require('node-fetch');
 
-import { getAlbum, getAlbums, getAlbumTracks } from '../src/album'
+import SpotifyWrapper from '../src/index';
 
 describe('Album', () => {
+  let spotify;
   let fetchedStub;
 
   beforeEach(() => {
+    spotify = new SpotifyWrapper({
+      token: 'foo'
+    });
+
     fetchedStub = sinon.stub(global, 'fetch');
     fetchedStub.resolves({ json: () => ({ album: 'name' }) });
   });
@@ -22,37 +27,37 @@ describe('Album', () => {
   describe('Smoke tests', () => {
 
     it('should have getAlbum method', () => {
-      expect(getAlbum).to.exist;
+      expect(spotify.album.getAlbum).to.exist;
     });
 
     it('should have getAlbums method', () => {
-      expect(getAlbums).to.exist;
+      expect(spotify.album.getAlbums).to.exist;
     });
 
     it('should have getAlbumTracks method', () => {
-      expect(getAlbumTracks).to.exist;
+      expect(spotify.album.getTracks).to.exist;
     });
 
   });
 
   describe('getAlbum', () => {
     it('should call fetch method', () => {
-      const album = getAlbum();
+      const album = spotify.album.getAlbum();
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct URL',() => {
-      const album = getAlbum('0sNOF9WDwhWunNAHPD3Baj');
+      const album = spotify.album.getAlbum('0sNOF9WDwhWunNAHPD3Baj');
 
       expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj');
 
-      const album2 = getAlbum('0sNOF9WDwhWunNAHPD3Bak');
+      const album2 = spotify.album.getAlbum('0sNOF9WDwhWunNAHPD3Bak');
 
       expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Bak');
     });
 
     it('should return the correct data from the promise', () => {
-      const album = getAlbum('0sNOF9WDwhWunNAHPD3Bak');
+      const album = spotify.album.getAlbum('0sNOF9WDwhWunNAHPD3Bak');
       album.then((data) => {
         expect(data).to.be.eql({ album: 'name'});
       });
@@ -62,18 +67,18 @@ describe('Album', () => {
 
   describe('getAlbums', () => {
     it('should call fetch method', () => {
-      const albums = getAlbums();
+      const albums = spotify.album.getAlbums();
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct URL',() => {
-      const albums = getAlbums(['0sNOF9WDwhWunNAHPD3Baj','0sNOF9WDwhWunNAHPD3Bak']);
+      const albums = spotify.album.getAlbums(['0sNOF9WDwhWunNAHPD3Baj','0sNOF9WDwhWunNAHPD3Bak']);
 
       expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/?ids=0sNOF9WDwhWunNAHPD3Baj,0sNOF9WDwhWunNAHPD3Bak');
     });
 
     it('should return the correct data from the promise', () => {
-      const albums = getAlbums(['0sNOF9WDwhWunNAHPD3Baj','0sNOF9WDwhWunNAHPD3Bak']);
+      const albums = spotify.album.getAlbums(['0sNOF9WDwhWunNAHPD3Baj','0sNOF9WDwhWunNAHPD3Bak']);
       albums.then((data) => {
         expect(data).to.be.eql({ album: 'name'});
       });
@@ -83,22 +88,22 @@ describe('Album', () => {
 
   describe('getAlbumTracks', () => {
     it('should call fetch method', () => {
-      const album = getAlbumTracks();
+      const album = spotify.album.getTracks();
       expect(fetchedStub).to.have.been.calledOnce;
     });
 
     it('should call fetch with the correct URL',() => {
-      const album = getAlbumTracks('0sNOF9WDwhWunNAHPD3Baj');
+      const album = spotify.album.getTracks('0sNOF9WDwhWunNAHPD3Baj');
 
       expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj/tracks');
 
-      const album2 = getAlbumTracks('0sNOF9WDwhWunNAHPD3Bak');
+      const album2 = spotify.album.getTracks('0sNOF9WDwhWunNAHPD3Bak');
 
       expect(fetchedStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Bak/tracks');
     });
 
     it('should return the correct data from the promise', () => {
-      const album = getAlbumTracks('0sNOF9WDwhWunNAHPD3Bak');
+      const album = spotify.album.getTracks('0sNOF9WDwhWunNAHPD3Bak');
       album.then((data) => {
         expect(data).to.be.eql({ album: 'name'});
       });
